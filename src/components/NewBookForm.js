@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { addBook } from '../redux/books/booksSlice';
 
 const categories = [
   'Action',
@@ -11,13 +12,16 @@ const categories = [
   'Sci-Fi',
 ];
 
-const NewBookForm = ({ onSubmit }) => {
+const NewBookForm = () => {
   const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
   const [category, setCategory] = useState(categories[0]);
+
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ title, category });
+    dispatch(addBook({ title, category, author }));
     setTitle('');
     setCategory(categories[0]);
   };
@@ -32,6 +36,17 @@ const NewBookForm = ({ onSubmit }) => {
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+        />
+      </label>
+
+      <label htmlFor="author">
+        Author:
+        <input
+          type="text"
+          name="author"
+          id="author"
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
         />
       </label>
 
@@ -54,10 +69,6 @@ const NewBookForm = ({ onSubmit }) => {
       <button type="submit">Add Book</button>
     </form>
   );
-};
-
-NewBookForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };
 
 export default NewBookForm;
