@@ -1,26 +1,16 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Books from './Books';
 import NewBookForm from './NewBookForm';
+import { removeBook } from '../redux/books/booksSlice';
 
 const BookList = () => {
-  const books = [
-    {
-      id: 1,
-      genre: 'Action',
-      title: 'The Hunger Games',
-      author: 'Suzanne Collins',
-      progress: '64%',
-      chapter: 'Chapter 17',
-    },
-    {
-      id: 2,
-      genre: 'Fiction',
-      title: 'Dune',
-      author: 'Frank Herbert',
-      progress: '8%',
-      chapter: 'Chapter 3: "A Lesson Learned"',
-    },
-  ];
+  const books = useSelector((state) => state.books);
+  const dispatch = useDispatch();
+
+  const handleRemove = (id) => {
+    dispatch(removeBook(id));
+  };
 
   return (
     <div>
@@ -28,11 +18,10 @@ const BookList = () => {
         {books.map((book) => (
           <Books
             key={book.id}
-            genre={book.genre}
+            id={book.id}
             title={book.title}
             author={book.author}
-            progress={book.progress}
-            chapter={book.chapter}
+            onRemove={handleRemove}
           />
         ))}
       </div>
