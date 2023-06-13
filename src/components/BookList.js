@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Books from './Books';
 import NewBookForm from './NewBookForm';
-import { removeBook } from '../redux/books/booksSlice';
+import { fetchBooks, removeBook } from '../redux/books/booksSlice';
 
 const BookList = () => {
-  const books = useSelector((state) => state.books);
   const dispatch = useDispatch();
+  const booksObject = useSelector((state) => state.books);
+
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, [dispatch]);
 
   const handleRemove = (id) => {
     dispatch(removeBook(id));
   };
 
+  const books = Object.values(booksObject);
+
   return (
     <div>
       <div>
-        {books.map((book) => (
+        {books.map((bookArray) => bookArray.map((book) => (
           <Books
             key={book.id}
             id={book.id}
@@ -23,7 +29,7 @@ const BookList = () => {
             author={book.author}
             onRemove={handleRemove}
           />
-        ))}
+        )))}
       </div>
       <div>
         <NewBookForm />
