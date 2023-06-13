@@ -1,23 +1,19 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import BookList from './components/BookList';
+import Home from './components/Home';
 import Categories from './components/Categories';
-import Navigation from './components/Navigation';
-import './App.css';
 
-function App() {
-  return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Navigation />
-        <Routes>
-          <Route exact path="/" element={<BookList />} />
-          <Route path="/categories" element={<Categories />} />
-        </Routes>
-      </BrowserRouter>
-    </Provider>
-  );
-}
+const App = () => (
+  <Provider store={store}>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/categories" element={<Categories />} />
+      </Routes>
+    </Router>
+  </Provider>
+);
 
 export default App;
