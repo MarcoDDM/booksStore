@@ -5,8 +5,8 @@ import NewBookForm from './NewBookForm';
 import { fetchBooks, removeBook } from '../redux/books/booksSlice';
 
 const BookList = () => {
+  const books = useSelector((state) => state.books);
   const dispatch = useDispatch();
-  const booksObject = useSelector((state) => state.books);
 
   useEffect(() => {
     dispatch(fetchBooks());
@@ -16,21 +16,27 @@ const BookList = () => {
     dispatch(removeBook(id));
   };
 
-  const books = Object.values(booksObject);
+  const bookElements = [];
+
+  // Iterate over the book IDs
+  Object.keys(books).forEach((id) => {
+    // Iterate over the book objects for each ID
+    books[id].forEach((book) => {
+      bookElements.push(
+        <Books
+          key={id}
+          id={id}
+          title={book.title}
+          author={book.author}
+          onRemove={handleRemove}
+        />,
+      );
+    });
+  });
 
   return (
     <div>
-      <div>
-        {books.map((bookArray) => bookArray.map((book) => (
-          <Books
-            key={book.id}
-            id={book.id}
-            title={book.title}
-            author={book.author}
-            onRemove={handleRemove}
-          />
-        )))}
-      </div>
+      <div>{bookElements}</div>
       <div>
         <NewBookForm />
       </div>
