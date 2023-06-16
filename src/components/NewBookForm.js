@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { addBook } from '../redux/books/booksSlice';
 
 const categories = [
@@ -12,52 +13,54 @@ const categories = [
   'Sci-Fi',
 ];
 
-const NewBookForm = () => {
+const AddForm = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [category, setCategory] = useState(categories[0]);
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleAuthorChange = (e) => {
+    setAuthor(e.target.value);
+  };
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+  };
+
+  const handleAdd = (e) => {
     e.preventDefault();
-    dispatch(addBook({ title, category, author }));
+    const newBook = {
+      itemId: uuidv4(),
+      title,
+      author,
+      category,
+    };
+    dispatch(addBook(newBook));
     setTitle('');
+    setAuthor('');
     setCategory(categories[0]);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="title">
-        Book Title:
-        <input
-          type="text"
-          name="title"
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+    <form onSubmit={handleAdd}>
+      <label htmlFor="bookTitle">
+        Title
+        <input type="text" id="bookTitle" placeholder="Title" value={title} onChange={handleTitleChange} />
       </label>
-
-      <label htmlFor="author">
-        Author:
-        <input
-          type="text"
-          name="author"
-          id="author"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        />
+      <br />
+      <label htmlFor="bookAuthor">
+        Author
+        <input type="text" id="bookAuthor" placeholder="Author" value={author} onChange={handleAuthorChange} />
       </label>
-
-      <label htmlFor="category">
-        Category:
-        <select
-          name="category"
-          id="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
+      <br />
+      <label htmlFor="bookCategory">
+        Category
+        <select id="bookCategory" value={category} onChange={handleCategoryChange}>
           {categories.map((category) => (
             <option key={category} value={category}>
               {category}
@@ -65,10 +68,10 @@ const NewBookForm = () => {
           ))}
         </select>
       </label>
-
+      <br />
       <button type="submit">Add Book</button>
     </form>
   );
 };
 
-export default NewBookForm;
+export default AddForm;
