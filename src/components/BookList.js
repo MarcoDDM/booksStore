@@ -1,34 +1,37 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import Books from './Books';
 import NewBookForm from './NewBookForm';
-import { removeBook } from '../redux/books/booksSlice';
+import { getBooks } from '../redux/books/booksSlice';
 
 const BookList = () => {
-  const books = useSelector((state) => state.books);
+  const books = useSelector((store) => store.books);
+
   const dispatch = useDispatch();
 
-  const handleRemove = (id) => {
-    dispatch(removeBook(id));
-  };
+  useEffect(() => {
+    dispatch(getBooks());
+  }, [dispatch]);
+
+  const booksToRender = [];
+  const ids = Object.keys(books);
+  ids.forEach((bookId) => {
+    booksToRender.push(<Books
+      key={bookId}
+      itemId={bookId}
+      title={books[bookId][0].title}
+      author={books[bookId][0].author}
+      category={books[bookId][0].category}
+    />);
+  });
 
   return (
-    <div>
-      <div>
-        {books.map((book) => (
-          <Books
-            key={book.id}
-            id={book.id}
-            title={book.title}
-            author={book.author}
-            onRemove={handleRemove}
-          />
-        ))}
+    <section>
+      <div className="books-container">
+        {booksToRender}
       </div>
-      <div>
-        <NewBookForm />
-      </div>
-    </div>
+      <NewBookForm />
+    </section>
   );
 };
 
