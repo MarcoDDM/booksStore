@@ -162,41 +162,6 @@
   background-color: #e8e8e8;
   width: 0.125rem;
   height: 4.375rem;
-  margin: 0 2.5rem;
-}
-
-.update-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.current-chapter {
-  font-family: 'Roboto Slab', sans-serif;
-  font-size: 0.813rem;
-  font-weight: 300;
-  color: #121212;
-  opacity: 0.5;
-}
-
-.chapter-name {
-  font-family: 'Roboto Slab', sans-serif;
-  font-weight: 300;
-  font-size: 1rem;
-  color: #121212;
-}
-
-.update-btn {
-  font-family: 'Roboto Slab', sans-serif;
-  font-size: 0.813rem;
-  font-weight: 300;
-  background-color: #0290ff;
-  color: #fff;
-  padding: 0.5rem 1.3rem;
-  border: none;
-  border-radius: 4px;
-  margin-top: 1rem;
-  cursor: pointer;
 }
 
 .form-container {
@@ -250,23 +215,4 @@
 
 .grow-3 {
   flex: 3;
-}
-
-.category  {
-  width: 17.813rem;
-  height: 2.813rem;
-  margin: 1.188rem 2.125rem 0;
-  padding: 0.375rem 0.938rem 0.563rem 1rem;
-  border-radius: 4px;
-  border: solid 1px #e8e8e8;
-  background-color: var(--white-two);
-}
-
-.footer-container {
-  margin-top: auto;
-  padding: 1.8rem 6.25rem;
-  display: flex;
-  place-content: center;
-  background-color: #fff;
-  border-top: #c4c4c4;
 }
