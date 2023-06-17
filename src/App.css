@@ -224,3 +224,19 @@
   height: 2.063rem;
   border: 0px;
 }
+
+.input-category {
+  border-radius: 4px;
+  border: solid 1px #e8e8e8;
+  background-color: #fff;
+  padding: 1.063rem;
+  width: 40%;
+  margin: auto;
+  color: #c4c4c4;
+  font-size: 1rem;
+}
+
+.input-category .cat {
+  color: #2a2929;
+  font-size: 1rem;
+}

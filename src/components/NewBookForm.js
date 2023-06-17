@@ -24,10 +24,6 @@ const NewBookForm = () => {
     setTitle(e.target.value);
   };
 
-  const handleAuthorChange = (e) => {
-    setAuthor(e.target.value);
-  };
-
   const handleAdd = (e) => {
     e.preventDefault();
     const newBook = {
@@ -51,11 +47,15 @@ const NewBookForm = () => {
         <label className="grow-3" htmlFor="bookTitle">
           <input className="input-control input-title" type="text" id="bookTitle" placeholder="Title" value={title} onChange={handleTitleChange} required />
         </label>
-        <br />
-        <label className="grow-3" htmlFor="bookAuthor">
-          <input className="input-control input-author" type="text" id="bookAuthor" placeholder="Author" value={author} onChange={handleAuthorChange} required />
-        </label>
-        <br />
+        <select className="input-category" id="categories">
+          <option className="cat" value="Category">Category</option>
+          <option className="cat" value="Action">Action</option>
+          <option className="cat" value="Fiction">Fiction</option>
+          <option className="cat" value="Horror">Horror</option>
+          <option className="cat" value="Kids">Kids</option>
+          <option className="cat" value="Learning">Learning</option>
+          <option className="cat" value="Sci-Fi">Sci-Fi</option>
+        </select>
         <button className="input-control input-send" type="submit">ADD BOOK</button>
       </form>
     </div>
