@@ -216,3 +216,11 @@
 .grow-3 {
   flex: 3;
 }
+
+.update-btn {
+  color: white;
+  background-color: #0290ff;
+  width: 11.5rem;
+  height: 2.063rem;
+  border: 0px;
+}
